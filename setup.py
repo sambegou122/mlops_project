@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'predict=sentiment_analyzer.predict:predict'
+            'predict=sentiment_analyzer.predict:predict',
         ],
     },
 )
