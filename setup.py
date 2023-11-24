@@ -11,6 +11,8 @@ setup(
     entry_points={
         'console_scripts': [
             'predict=sentiment_analyzer.predict:predict',
+            'promote=sentiment_analyzer.promote:promote',
+            'retrain=sentiment_analyzer.retrain:retrain',
         ],
     },
 )

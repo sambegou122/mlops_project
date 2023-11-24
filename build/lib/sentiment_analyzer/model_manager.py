@@ -1,7 +1,6 @@
 
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score
 
 
 class ModelManager():
@@ -34,7 +33,7 @@ class ModelManager():
             return "Predictions saved to {self.output_file}"
     
 
-    def retrain(self, training_set)-> int:
+    def retrain(self, training_set)-> str:
         """Retrain the model."""
         
         df = pd.read_csv(training_set, delimiter=',')
@@ -44,7 +43,3 @@ class ModelManager():
         print("model training...")
         self.model.fit(df['review'], df['polarity'])
         print("model trained")
-        predictions = self.model.predict(df['review'])
-        score = accuracy_score(df['polarity'], predictions)
-        print(f"Model accuracy: {score}")
-        return score
