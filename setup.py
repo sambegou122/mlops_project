@@ -13,6 +13,8 @@ setup(
             'predict=sentiment_analyzer.predict:predict',
             'promote=sentiment_analyzer.promote:promote',
             'retrain=sentiment_analyzer.retrain:retrain',
+            'app=sentiment_analyzer.webapp.app:app',
+            'get_mlflow_model=sentiment_analyzer.webapp.get_mlflow_model:main',
         ],
     },
 )

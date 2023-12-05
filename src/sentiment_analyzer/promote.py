@@ -42,14 +42,53 @@ def promote(model_name, model_version, status, test_set):
     
 
     # If promoting to Production, run the tests
+    if status == 'Staging':
+        print("Running tests...")
+        test_result = subprocess.run(
+            ["pytest",pkg_resources.resource_filename('sentiment_analyzer', "./tests")], \
+            capture_output=False)
+        if test_result.returncode != 0:
+            print("Tests failed. Model not promoted")
+            sys.exit(1)
+        else:
+            print("Tests passed. Model promoted to Staging")
+            client.transition_model_version_stage(
+                name=model_name,
+                version=model_version,
+                stage="Staging",
+            )
+
     if status == 'Production':
         print("Running tests...")
         test_result = subprocess.run(
             ["pytest",pkg_resources.resource_filename('sentiment_analyzer', "./tests")], \
             capture_output=False)
+        if test_result.returncode != 0:
+            print("Tests failed. Model not promoted")
+            sys.exit(1)
+        else:
+            print("Tests passed. Model promoted to Production")
+            client.transition_model_version_stage(
+                name=model_name,
+                version=model_version,
+                stage="Production",
+            )
     
     if status == 'Archived':
-        mlflow.delete_model(f"{model_name}/{model_version}")
+        print("Running tests...")
+        test_result = subprocess.run(
+            ["pytest",pkg_resources.resource_filename('sentiment_analyzer', "./tests")], \
+            capture_output=False)
+        if test_result.returncode != 0:
+            print("Tests failed. Model not promoted")
+            sys.exit(1)
+        else:
+            print("Tests passed. Model promoted to Archived")
+            client.transition_model_version_stage(
+                name=model_name,
+                version=model_version,
+                stage="Archived",
+            )
 
 
 

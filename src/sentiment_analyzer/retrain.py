@@ -25,6 +25,7 @@ def retrain(model_name, model_version, training_set, \
     """Retrain the model."""
 
     # Load the model
+    mlflow.set_experiment('Sentiment Analysis')
     mlflow.set_tracking_uri(mlflow_url)
     model_uri = f"models:/{model_name}/{model_version}"
     model = mlflow.sklearn.load_model(model_uri)

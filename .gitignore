@@ -20,6 +20,5 @@ node_modules
 # ignore mlflow files
 mlflow
 mlruns
-
-
-
+# ignore model
+model
