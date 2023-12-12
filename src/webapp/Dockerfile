@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /webapp
 
 # Install required packages
-RUN pip install mlflow fastapi uvicorn python-dotenv
+RUN pip install mlflow fastapi uvicorn python-dotenv loguru pymongo
 
 # Copy the required source files
 COPY app.py .

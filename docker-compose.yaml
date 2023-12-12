@@ -1,0 +1,24 @@
+services:
+  webapp:
+    image: sentiment-analyzer:hyper-opt-logistique-1
+
+  frontend:
+    build: ./src/frontend
+    image: sentiment-analyzer-app
+    ports:
+      - 8501:8501
+    environment:
+      - PREDICT_URL=http://webapp:8000
+
+  mongo:
+      image: mongo:latest
+      ports:
+        - 27017:27017
+      volumes:
+        - mongo-data:/data/db
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=admin
+        - MONGO_INITDB_ROOT_PASSWORD=password
+
+volumes:
+  mongo-data:
