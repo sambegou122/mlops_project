@@ -8,6 +8,10 @@ This project aims to set up an MLOps pipeline for a machine learning model. The 
 
 ```
 |-- README.md
+|-- docker-compose.yml
+|-- .gitignore
+|-- .env
+|-- setup.py
 |-- requirements.txt
 |-- Makefile
 |-- notebooks
@@ -25,6 +29,16 @@ This project aims to set up an MLOps pipeline for a machine learning model. The 
     |   |-- tests
     |       |-- __init__.py
     |       |-- test_model.py
+    |   |-- webapp
+    |       |-- app.py
+    |       |-- Dockerfile
+    |       |-- get_mlflow_model.py
+    |       |-- dokercompile.sh
+    |   |-- frontend
+    |       |-- app.py
+    |       |-- Dockerfile
+
+
     
 ```	
 ## Notebooks
@@ -73,11 +87,11 @@ To run the tests, you must execute the make command:
 make test
 ```
 
-## Training the model
+## Retraining the model
 To train the model, you must execute the make command:
 
 ```bash
- train --model-name <model_name> --model-version <model_version> --training_set <data_path> ---training_set_id <training_set_id> --register_updated_model <register_updated_model>
+ retrain --model-name <model_name> --model-version <model_version> --training_set <data_path> ---training_set_id <training_set_id> --register_updated_model <register_updated_model>
 ```
 Options:
 - model-name: The name of the model to train
@@ -101,6 +115,45 @@ Options:
 - output_file: The path to the output file if you want to predict with a file
 - text: The text to predict with if you want to predict with a text
 Note: You must specify either the input_file or the text option
+
+## Promoting the model
+To promote the model, you must execute the make command:
+
+```bash
+ promote --model-name <model_name> --model-version <model_version> --status <status_to_promote> --test_set <test_set_path> 
+
+```
+The rule of the status is the following:
+- Production: The model will be promoted to production
+- Staging: The model will be promoted to staging
+- Archived: The model will be archived
+
+Options:
+- model-name: The name of the model to promote
+- model-version: The version of the model to promote
+- status: The status to promote the model to
+- test_set: The path to the test set
+
+## Web service
+
+For the web services we build two services, the webapp thzt containt the backend of the project. It build with FastAPI that allow us to build a web service with python. The second service is the frontend that is build with Streamlit. This service allow us to build a web application with python.
+
+## Running the web service
+
+For using the web service, we build with docker compose a docker image that contain the two services and linked by a docker network, so you can run the web service with the following command:
+
+```bash
+docker-compose build
+docker-compose up
+
+```
+
+## Using the web service
+For using the web service, you must go to the following url: http://localhost:8501/
+And you have to enter the text you want to predict and click on the predict button. The result will be displayed on the screen.
+
+
+
 
 
 
