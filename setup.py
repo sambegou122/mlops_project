@@ -15,6 +15,7 @@ setup(
             'retrain=sentiment_analyzer.retrain:retrain',
             'app=sentiment_analyzer.webapp.app:app',
             'get_mlflow_model=sentiment_analyzer.webapp.get_mlflow_model:main',
+            'hf_export=sentiment_analyzer.hf_export:hf_export',
         ],
     },
 )

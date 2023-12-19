@@ -15,7 +15,7 @@ COPY get_mlflow_model.py .
 ARG MLFLOW_SERVER_URI MODEL_NAME MODEL_VERSION
 
 # Run the model retrieval script
-RUN python3 get_mlflow_model.py --mlflow_server_uri $MLFLOW_SERVER_URI --mlflow_model_name $MODEL_NAME --mlflow_model_version $MODEL_VERSION --target_path /model
+RUN python get_mlflow_model.py --mlflow_server_uri $MLFLOW_SERVER_URI --mlflow_model_name $MODEL_NAME --mlflow_model_version $MODEL_VERSION --target_path /model
 
 # Install the model requirements
 RUN pip install -r /model/requirements.txt
