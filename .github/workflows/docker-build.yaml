@@ -28,9 +28,9 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/webapp.hf:latest
         build-args: |
-          <HF_ID>=${{ secrets.HUGGINGFACE_ID }}
-          <MODEL_NAME>=${{ secrets.MODEL_NAME }}
-          <MODEL_VERSION>=${{ secrets.MODEL_VERSION }}
+          HF_ID=${{ secrets.HUGGINGFACE_ID }}
+          MODEL_NAME=${{ secrets.MODEL_NAME }}
+          MODEL_VERSION=${{ secrets.MODEL_VERSION }}
         
     - name: Build and Push frontend
       uses: docker/build-push-action@v2
