@@ -10,4 +10,4 @@ ARG MODEL_VERSION
 RUN python3 -c "from skops import hub_utils; hub_utils.download(repo_id='${HF_ID}/${MODEL_NAME}-${MODEL_VERSION}', dst='/model')"
 COPY app.py ./
 EXPOSE 8000
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
