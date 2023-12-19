@@ -30,7 +30,7 @@ jobs:
           HF_ID=${{ vars.HUGGINGFACE_ID }}
           MODEL_NAME=${{ vars.MODEL_NAME }}
           MODEL_VERSION=${{ vars.MODEL_VERSION }}
-        
+     
     - name: Build and Push frontend
       uses: docker/build-push-action@v2
       with:

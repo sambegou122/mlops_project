@@ -1,4 +1,4 @@
-from sklearn.externals import joblib
+import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
 from loguru import logger
