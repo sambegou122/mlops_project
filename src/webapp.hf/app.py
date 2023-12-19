@@ -8,9 +8,9 @@ from pymongo import MongoClient
 model = joblib.load("/model/model.pkl")
 
 ## Connect to MongoDB
-client  = MongoClient("mongodb://mongo:27017/")
-db = client["sentiment_analyzer"]
-collection = db["history"]
+# client  = MongoClient("mongodb://mongo:27017/")
+# db = client["sentiment_analyzer"]
+# collection = db["history"]
 
 
 app=FastAPI(title="Sentiment Analyzer", version="1", destription="Sentiment Analyzer API")
@@ -36,7 +36,7 @@ def predict(input:PredictInput):
 
         predictions = model.predict(input.reviews).tolist()
         predictions = [ "positive" if x == 1 else "negative" for x in predictions]
-        collection.insert_one({"reviews": input.reviews, "sentiments": predictions})
+        # collection.insert_one({"reviews": input.reviews, "sentiments": predictions})
 
         logger.debug(f"Input: {input.reviews}, Output: {predictions}")
         return {"sentiments": predictions}
@@ -56,7 +56,8 @@ def history(n :int):
     try:
         logger.info("Received request for history")
         # Your prediction code here
-        history = list(collection.find().sort("_id", -1).limit(n))
+        # history = collection.find().sort("_id", -1).limit(n)
+        history = ["not implemented yet"]
 
         logger.debug(f"Output: {history}")
         return {"history": history}
