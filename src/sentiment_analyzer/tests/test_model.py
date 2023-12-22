@@ -5,11 +5,6 @@ import os
 import numpy as np
 from sklearn.metrics import accuracy_score
 from dotenv import load_dotenv
-# os.environ["TEST_BASELINE_VERSION"] = "1"
-# os.environ["TEST_BASELINE_MODEL"] ="logistic-regression"
-# os.environ["TEST_MODEL_VERSION"] = "1"
-# os.environ["TEST_MODEL_NAME"] = "hyper-opt-logistique"
-# os.environ["TEST_TEST_SET"] = "./notebook/data/test.csv"
 
 load_dotenv()
 

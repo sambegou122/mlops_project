@@ -6,7 +6,7 @@ import subprocess
 import pkg_resources
 from dotenv import load_dotenv 
 import pandas as pd
-load_dotenv
+load_dotenv()
 
 @click.command()
 @click.option('--model_name', type=str, required=True, help='Model name in MLFlow registry')

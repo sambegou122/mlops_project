@@ -136,15 +136,53 @@ Options:
 
 ## Web service
 
-For the web services we build two services, the webapp thzt containt the backend of the project. It build with FastAPI that allow us to build a web service with python. The second service is the frontend that is build with Streamlit. This service allow us to build a web application with python.
+For the web services we build two services, the webapp that containt the backend (API) of the project. It build with FastAPI that allow us to build a web service with python. The second service is the frontend that is build with Streamlit. This service allow us to build a web application with python.
 
 ## Running the web service
 
 For using the web service, we build with docker compose a docker image that contain the two services and linked by a docker network, so you can run the web service with the following command:
 
 ```bash
+
 docker-compose build
+
 docker-compose up
+
+```
+docker-compose build: This command build the docker image
+
+docker-compose up: This command run the docker image
+
+With this file you can run the web service
+```bash
+version: '3.8'
+
+services:
+  webapp:
+    image: dialloib/webapp.hf:latest
+
+  frontend:
+    image: dialloib/frontend:latest
+    ports:
+      - "8501:8501"
+    environment:
+      - PREDICT_URL=http://webapp:8000
+    depends_on:
+      - webapp
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-data:/data/db
+
+
+volumes:
+  mongo-data:
 
 ```
 
